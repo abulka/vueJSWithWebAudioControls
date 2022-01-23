@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <webaudio-keyboard ref="keyboardRef" keys="25" id="mykeyboard"></webaudio-keyboard>
+    <br />
     <webaudio-knob
       src="./assetsForWebAudioControls/knobs/greenish_sloped.png"
       midilearn="true"
@@ -12,8 +14,7 @@
       value="0"
       id="/BigMuff/Input"
       style="height: 50px"
-    >
-    </webaudio-knob>
+    ></webaudio-knob>
     <webaudio-knob
       src="./assetsForWebAudioControls/knobs/Jambalaya.png"
       height="50"
@@ -25,8 +26,7 @@
       midilearn="true"
       value="0.5"
       id="/GuitarAmpSim60s/Bass"
-    >
-    </webaudio-knob>
+    ></webaudio-knob>
     <br />
     <webaudio-switch
       src="./assetsForWebAudioControls/switches/switch_1.png"
@@ -34,8 +34,7 @@
       height="32"
       width="55"
       id="/BigMuff/bypass"
-    >
-    </webaudio-switch>
+    ></webaudio-switch>
   </div>
 </template>
 
