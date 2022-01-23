@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <webaudio-keyboard ref="keyboardRef" keys="25" id="mykeyboard"></webaudio-keyboard>
+    {{ keyboardKey }}
     <br />
     <webaudio-knob
       src="./assetsForWebAudioControls/knobs/greenish_sloped.png"
@@ -46,6 +47,33 @@ export default {
   props: {
     msg: String,
   },
+  data() {
+    return {
+      keyboardKey: 0,
+      knob1Value: 0,
+      knob2Value: 0,
+      switchState: false,
+    };
+  },
+  mounted() {
+    let self = this  // for inside the handlers
+
+    this.$refs.keyboardRef.addEventListener('change', function (e) {
+      if (e.note[0]) {
+        console.log("Note-On:" + e.note[1])
+        self.keyboardKey = e.note[1]
+      }
+      else
+        console.log("Note-Off:" + e.note[1])
+    });
+
+  },
+  watch: {
+    keyboardKey: function (newVal, oldVal) {
+      console.log('keyboardKey changed from ' + oldVal + ' to ' + newVal)
+      this.$refs.keyboardRef.setNote(true, newVal)
+    }
+  }
 };
 </script>
 
