@@ -38,12 +38,15 @@
     <br />
 
     <webaudio-switch
+      ref="switchRef"
       src="./assetsForWebAudioControls/switches/switch_1.png"
       midilearn="true"
       height="32"
       width="55"
       id="/BigMuff/bypass"
     ></webaudio-switch>
+    <div class="value">{{ switchState }}</div>
+
   </div>
 </template>
 
@@ -79,6 +82,9 @@ export default {
     this.$refs.knob2Ref.addEventListener('input', function (e) {
       self.knob2Value = e.target.value
     });
+    this.$refs.switchRef.addEventListener('change', function (e) {
+      self.switchState = e.target.value ? true : false
+    });
 
   },
   watch: {
@@ -88,9 +94,6 @@ export default {
       this.$refs.keyboardRef.setNote(true, newVal)
       this.$refs.knob1Ref.setValue(newVal)
     },
-    knob2Value: function (newVal, oldVal) {
-      console.log('knob1Value changed from ' + oldVal + ' to ' + newVal)
-    }
   }
 };
 </script>
