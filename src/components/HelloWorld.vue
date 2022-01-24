@@ -1,34 +1,42 @@
 <template>
   <div class="hello">
     <webaudio-keyboard ref="keyboardRef" keys="25" id="mykeyboard"></webaudio-keyboard>
-    {{ keyboardKey }}
-    <br />
+
     <webaudio-knob
-      src="./assetsForWebAudioControls/knobs/greenish_sloped.png"
-      midilearn="true"
-      height="50"
-      width="50"
-      sprites="100"
-      min="-24"
-      max="12"
-      step="0.1"
-      value="0"
-      id="/BigMuff/Input"
-      style="height: 50px"
-    ></webaudio-knob>
-    <webaudio-knob
+      ref="knob1Ref"
       src="./assetsForWebAudioControls/knobs/Jambalaya.png"
       height="50"
       width="50"
       sprites="100"
       min="0"
-      max="1"
-      step="0.01"
+      max="24"
+      step="1"
       midilearn="true"
       value="0.5"
       id="/GuitarAmpSim60s/Bass"
     ></webaudio-knob>
+    <div class="value">{{ keyboardKey }}</div>
+
     <br />
+
+    <webaudio-knob
+      ref="knob2Ref"
+      src="./assetsForWebAudioControls/knobs/greenish_sloped.png"
+      midilearn="true"
+      height="50"
+      width="50"
+      sprites="100"
+      min="0"
+      max="24"
+      step="1"
+      value="0"
+      id="/BigMuff/Input"
+      style="height: 50px"
+    ></webaudio-knob>
+    <div class="value">{{ knob2Value }}</div>
+
+    <br />
+
     <webaudio-switch
       src="./assetsForWebAudioControls/switches/switch_1.png"
       midilearn="true"
@@ -50,7 +58,6 @@ export default {
   data() {
     return {
       keyboardKey: 0,
-      knob1Value: 0,
       knob2Value: 0,
       switchState: false,
     };
@@ -66,12 +73,23 @@ export default {
       else
         console.log("Note-Off:" + e.note[1])
     });
+    this.$refs.knob1Ref.addEventListener('input', function (e) {
+      self.keyboardKey = e.target.value
+    });
+    this.$refs.knob2Ref.addEventListener('input', function (e) {
+      self.knob2Value = e.target.value
+    });
 
   },
   watch: {
     keyboardKey: function (newVal, oldVal) {
       console.log('keyboardKey changed from ' + oldVal + ' to ' + newVal)
+      this.$refs.keyboardRef.setNote(false, oldVal)
       this.$refs.keyboardRef.setNote(true, newVal)
+      this.$refs.knob1Ref.setValue(newVal)
+    },
+    knob2Value: function (newVal, oldVal) {
+      console.log('knob1Value changed from ' + oldVal + ' to ' + newVal)
     }
   }
 };
@@ -92,5 +110,8 @@ li {
 }
 a {
   color: #42b983;
+}
+div.value {
+  color: darkcyan;
 }
 </style>
