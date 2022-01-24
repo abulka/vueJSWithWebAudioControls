@@ -47,6 +47,29 @@
     ></webaudio-switch>
     <div class="value">{{ switchState }}</div>
 
+    <h1>Global State</h1>
+
+    <button @click="setGlobalTo(0)">set to 0</button>
+    <button @click="setGlobalTo(50)">set to 50</button>
+
+    <webaudio-knob
+      ref="knobGlobalRef"
+      src="./assetsForWebAudioControls/knobs/LittlePhatty.png"
+      min="0"
+      max="100"
+      sprites="100"
+    ></webaudio-knob>
+
+    <webaudio-slider
+      ref="sliderGlobalRef"
+      id="sli2"
+      src="./assetsForWebAudioControls/sliders/hsliderbody.png"
+      knobsrc="./assetsForWebAudioControls/sliders/hsliderknob.png"
+      width="300"
+      height="30"
+    ></webaudio-slider>
+
+    <div class="value">{{ $store.state.keyboardKeyGlobal }}</div>
   </div>
 </template>
 
@@ -65,8 +88,17 @@ export default {
       switchState: false,
     };
   },
+  methods: {
+    setGlobalTo(value) {
+      this.$store.commit("setKeyboardKeyGlobal", value);
+    },
+  },
   mounted() {
     let self = this  // for inside the handlers
+
+    console.log('this.$store.state.keyboardKeyGlobal', this.$store.state.keyboardKeyGlobal)
+    this.$store.commit("setKeyboardKeyGlobal", 2);
+    console.log('this.$store.state.keyboardKeyGlobal', this.$store.state.keyboardKeyGlobal)
 
     this.$refs.keyboardRef.addEventListener('change', function (e) {
       if (e.note[0]) {
@@ -85,7 +117,14 @@ export default {
     this.$refs.switchRef.addEventListener('change', function (e) {
       self.switchState = e.target.value ? true : false
     });
-
+    this.$refs.knobGlobalRef.addEventListener('input', function (e) {
+      self.$store.commit("setKeyboardKeyGlobal", e.target.value);
+      console.log('knobGlobalRef', e.target.value)
+    });
+    this.$refs.sliderGlobalRef.addEventListener('input', function (e) {
+      self.$store.commit("setKeyboardKeyGlobal", e.target.value);
+      console.log('sliderGlobalRef', e.target.value)
+    });
   },
   watch: {
     keyboardKey: function (newVal, oldVal) {
@@ -94,6 +133,11 @@ export default {
       this.$refs.keyboardRef.setNote(true, newVal)
       this.$refs.knob1Ref.setValue(newVal)
     },
+    '$store.state.keyboardKeyGlobal': function (newVal, oldVal) {
+      console.log('global watch from', newVal, 'to', oldVal)
+      this.$refs.knobGlobalRef.setValue(newVal)
+      this.$refs.sliderGlobalRef.setValue(newVal)
+    }
   }
 };
 </script>
