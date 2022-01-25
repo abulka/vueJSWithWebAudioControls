@@ -1,18 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <WebAudioKnobVue msg="boo" v-bind:val="knob1Value" @changeKnobValue="knob1Value = $event"></WebAudioKnobVue>
+    <!-- <WebAudioKnobVue msg="boo" :val.sync="knob1Value"  @changeKnobValue="knob1Value = $event"></WebAudioKnobVue> -->
+    <p>Parent knob1Value is:</p>
+    <h1>{{ knob1Value }}</h1>
+    <button @click="knob1Value = 0">set to 0</button>
+    <button @click="knob1Value = 20">set to 20</button>
+    <button @click="knob1Value = 50">set to 50</button>
+    <br>
+    
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import WebAudioKnobVue from './components/WebAudioKnob.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    HelloWorld,
+    WebAudioKnobVue
+  },
+  data() {
+    return {
+      knob1Value: 50,
+    };
+  },
 }
 </script>
 
