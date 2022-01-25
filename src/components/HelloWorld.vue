@@ -69,7 +69,7 @@
       height="30"
     ></webaudio-slider>
 
-    <div class="value">{{ $store.state.keyboardKeyGlobal }}</div>
+    <div class="value">{{ $store.state.knobValGlobal }}</div>
   </div>
 </template>
 
@@ -90,15 +90,15 @@ export default {
   },
   methods: {
     setGlobalTo(value) {
-      this.$store.commit("setKeyboardKeyGlobal", value);
+      this.$store.commit("setKnobValGlobal", value);
     },
   },
   mounted() {
     let self = this  // for inside the handlers
 
-    console.log('this.$store.state.keyboardKeyGlobal', this.$store.state.keyboardKeyGlobal)
-    this.$store.commit("setKeyboardKeyGlobal", 2);
-    console.log('this.$store.state.keyboardKeyGlobal', this.$store.state.keyboardKeyGlobal)
+    console.log('this.$store.state.knobValGlobal', this.$store.state.knobValGlobal)
+    this.$store.commit("setKnobValGlobal", 2);
+    console.log('this.$store.state.knobValGlobal', this.$store.state.knobValGlobal)
 
     this.$refs.keyboardRef.addEventListener('change', function (e) {
       if (e.note[0]) {
@@ -118,11 +118,11 @@ export default {
       self.switchState = e.target.value ? true : false
     });
     this.$refs.knobGlobalRef.addEventListener('input', function (e) {
-      self.$store.commit("setKeyboardKeyGlobal", e.target.value);
+      self.$store.commit("setKnobValGlobal", e.target.value);
       console.log('knobGlobalRef', e.target.value)
     });
     this.$refs.sliderGlobalRef.addEventListener('input', function (e) {
-      self.$store.commit("setKeyboardKeyGlobal", e.target.value);
+      self.$store.commit("setKnobValGlobal", e.target.value);
       console.log('sliderGlobalRef', e.target.value)
     });
   },
@@ -133,7 +133,7 @@ export default {
       this.$refs.keyboardRef.setNote(true, newVal)
       this.$refs.knob1Ref.setValue(newVal)
     },
-    '$store.state.keyboardKeyGlobal': function (newVal, oldVal) {
+    '$store.state.knobValGlobal': function (newVal, oldVal) {
       console.log('global watch from', newVal, 'to', oldVal)
       this.$refs.knobGlobalRef.setValue(newVal)
       this.$refs.sliderGlobalRef.setValue(newVal)
