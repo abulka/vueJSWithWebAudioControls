@@ -13,7 +13,7 @@
       value="0.5"
       id="/GuitarAmpSim60s/Bass"
     ></webaudio-knob>
-    <div class="props">PROPS: msg= "{{ msg }}" val={{ val }}</div>
+    <!-- <div class="props">PROPS: msg= "{{ msg }}" val={{ val }}</div> -->
   </div>
 </template>
 

@@ -1,18 +1,20 @@
 <template>
   <div id="app">
-    <h2>Parent knob1Value is:</h2>
-    <h1>{{ knob1Value }}</h1>
+    <h2>Parent Component</h2>
+    <p>knob1Value is: {{ knob1Value }}</p>
     <button @click="knob1Value = 0">set to 0</button>
     <button @click="knob1Value = 20">set to 20</button>
     <button @click="knob1Value = 50">set to 50</button>
     <br>
 
-    <h2>knob component adjusting parent state</h2>
+    <h2>Child Component WebAudioKnobVue</h2>
+    <p>knob adjusts parent state ⬆️</p>
     <WebAudioKnobVue msg="boo" v-bind:val="knob1Value" @changeKnobValue="knob1Value = $event"></WebAudioKnobVue>
     <!-- <WebAudioKnobVue msg="boo" :val.sync="knob1Value"  @changeKnobValue="knob1Value = $event"></WebAudioKnobVue> -->
     
-    <h2>knob component adjusting global knob state</h2>
-    <WebAudioKnobVue msg="boo" v-bind:val="$store.state.keyboardKeyGlobal" @changeKnobValue="$store.commit('setKeyboardKeyGlobal', $event)"></WebAudioKnobVue>
+    <h2>Child Component WebAudioKnobVue</h2>
+    <p>knob component adjusting global knob state ⤵️</p>
+    <WebAudioKnobVue msg="boo" v-bind:val="$store.state.knobValGlobal" @changeKnobValue="$store.commit('setKnobValGlobal', $event)"></WebAudioKnobVue>
     
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
