@@ -5,12 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    keyboardKeyGlobal: 0,
+    knobValGlobal: 0,
   },
   mutations: {
-    setKeyboardKeyGlobal(state, count) {
-      state.keyboardKeyGlobal = count
-      console.log('set keyboardKeyGlobal', state.keyboardKeyGlobal)
+    setKnobValGlobal(state, count) {
+      state.knobValGlobal = count
+      console.log('set knobValGlobal', state.knobValGlobal)
     }
   },
   actions: {
