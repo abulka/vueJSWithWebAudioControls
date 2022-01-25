@@ -9,7 +9,7 @@
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob adjusts parent state ⬆️</p>
-    <WebAudioKnobVue msg="boo" :val.sync="knob1Value" :step=10></WebAudioKnobVue>
+    <WebAudioKnobVue msg="boo" :val.sync="knob1Value" :step=10 :max=50></WebAudioKnobVue>
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob component adjusting global knob state ⤵️</p>

@@ -6,16 +6,17 @@
       height="50"
       width="50"
       sprites="100"
-      min="0"
-      max="50"
+      :min="min"
+      :max="max"
       :step="step"
       midilearn="true"
       :value="val"
       id="/GuitarAmpSim60s/Bass"
     ></webaudio-knob>
 
-    <div class="props">PROPS: msg= "{{ msg }}" val={{ val }} step={{ step}}</div>
-
+    <div
+      class="props"
+    >PROPS: msg= "{{ msg }}" val={{ val }} step={{ step }} min={{ min }} max={{ max }}</div>
   </div>
 </template>
 
@@ -30,6 +31,14 @@ export default {
     step: {
       type: Number,
       default: 1
+    },
+    min: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 100
     },
     height: {
       type: Number,
