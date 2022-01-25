@@ -5,17 +5,18 @@
     <button @click="knob1Value = 0">set to 0</button>
     <button @click="knob1Value = 20">set to 20</button>
     <button @click="knob1Value = 50">set to 50</button>
-    <br>
+    <br />
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob adjusts parent state ⬆️</p>
-    <WebAudioKnobVue msg="boo" v-bind:val="knob1Value" @changeKnobValue="knob1Value = $event"></WebAudioKnobVue>
-    <!-- <WebAudioKnobVue msg="boo" :val.sync="knob1Value"  @changeKnobValue="knob1Value = $event"></WebAudioKnobVue> -->
-    
+    <!-- <WebAudioKnobVue msg="boo" v-bind:val="knob1Value" @changeKnobValue="knob1Value = $event"></WebAudioKnobVue> -->
+    <WebAudioKnobVue msg="boo" :val.sync="knob1Value"></WebAudioKnobVue>
+
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob component adjusting global knob state ⤵️</p>
-    <WebAudioKnobVue msg="boo" v-bind:val="$store.state.knobValGlobal" @changeKnobValue="$store.commit('setKnobValGlobal', $event)"></WebAudioKnobVue>
-    
+    <!-- <WebAudioKnobVue msg="boo" v-bind:val="$store.state.knobValGlobal" @changeKnobValue="$store.commit('setKnobValGlobal', $event)"></WebAudioKnobVue> -->
+    <WebAudioKnobVue msg="boo" :val.sync="setKnob1"></WebAudioKnobVue>
+
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
@@ -36,6 +37,11 @@ export default {
       knob1Value: 50,
     };
   },
+  methods: {
+    setKnob1(value) {  // need a setter method cos need to set global state via commit call
+      this.$store.commit('setKnobValGlobal', value)
+    }
+  }
 }
 </script>
 

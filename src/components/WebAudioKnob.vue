@@ -43,7 +43,8 @@ export default {
   mounted() {
     let self = this  // for inside the handlers
     this.$refs.knobRef.addEventListener('input', function (e) {
-      self.$emit('changeKnobValue', e.target.value)
+      // self.$emit('changeKnobValue', e.target.value)
+      self.$emit('update:val', e.target.value)
     });
   },
   watch: {
