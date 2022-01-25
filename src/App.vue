@@ -9,12 +9,10 @@
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob adjusts parent state ⬆️</p>
-    <!-- <WebAudioKnobVue msg="boo" v-bind:val="knob1Value" @changeKnobValue="knob1Value = $event"></WebAudioKnobVue> -->
-    <WebAudioKnobVue msg="boo" :val.sync="knob1Value"></WebAudioKnobVue>
+    <WebAudioKnobVue msg="boo" :val.sync="knob1Value" :step=10></WebAudioKnobVue>
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob component adjusting global knob state ⤵️</p>
-    <!-- <WebAudioKnobVue msg="boo" v-bind:val="$store.state.knobValGlobal" @changeKnobValue="$store.commit('setKnobValGlobal', $event)"></WebAudioKnobVue> -->
     <WebAudioKnobVue msg="boo" :val.sync="knobValGlobal"></WebAudioKnobVue>
 
     <img alt="Vue logo" src="./assets/logo.png" />
@@ -34,7 +32,7 @@ export default {
   },
   data() {
     return {
-      knob1Value: 50,
+      knob1Value: 15,
     };
   },
   computed: {

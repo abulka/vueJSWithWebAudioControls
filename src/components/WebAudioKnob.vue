@@ -8,12 +8,14 @@
       sprites="100"
       min="0"
       max="50"
-      step="1"
+      :step="step"
       midilearn="true"
-      value="0.5"
+      :value="val"
       id="/GuitarAmpSim60s/Bass"
     ></webaudio-knob>
-    <!-- <div class="props">PROPS: msg= "{{ msg }}" val={{ val }}</div> -->
+
+    <div class="props">PROPS: msg= "{{ msg }}" val={{ val }} step={{ step}}</div>
+
   </div>
 </template>
 
@@ -25,6 +27,10 @@ export default {
   props: {
     msg: String,
     val: Number,
+    step: {
+      type: Number,
+      default: 1
+    },
     height: {
       type: Number,
       default: 50
@@ -43,7 +49,6 @@ export default {
   mounted() {
     let self = this  // for inside the handlers
     this.$refs.knobRef.addEventListener('input', function (e) {
-      // self.$emit('changeKnobValue', e.target.value)
       self.$emit('update:val', e.target.value)
     });
   },
