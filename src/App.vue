@@ -15,7 +15,7 @@
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob component adjusting global knob state ⤵️</p>
     <!-- <WebAudioKnobVue msg="boo" v-bind:val="$store.state.knobValGlobal" @changeKnobValue="$store.commit('setKnobValGlobal', $event)"></WebAudioKnobVue> -->
-    <WebAudioKnobVue msg="boo" :val.sync="setKnob1"></WebAudioKnobVue>
+    <WebAudioKnobVue msg="boo" :val.sync="knobValGlobal"></WebAudioKnobVue>
 
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
@@ -37,11 +37,17 @@ export default {
       knob1Value: 50,
     };
   },
-  methods: {
-    setKnob1(value) {  // need a setter method cos need to set global state via commit call
-      this.$store.commit('setKnobValGlobal', value)
+  computed: {
+    knobValGlobal: {
+      get() {
+        return this.$store.state.knobValGlobal
+      },
+      set(value) {
+        // need a setter method to support :val.sync="knobValGlobal" usage, since more complex to set global state
+        this.$store.commit('setKnobValGlobal', value)
+      }
     }
-  }
+  },
 }
 </script>
 
