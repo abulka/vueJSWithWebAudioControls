@@ -3,20 +3,20 @@
     <webaudio-knob
       ref="knobRef"
       src="./assetsForWebAudioControls/knobs/Jambalaya.png"
-      height="50"
-      width="50"
+      :height="height"
+      :width="width"
       sprites="100"
       :min="min"
       :max="max"
       :step="step"
-      midilearn="true"
+      :midilearn="midilearn"
       :value="value"
       id="/GuitarAmpSim60s/Bass"
     ></webaudio-knob>
 
     <div
       class="props"
-    >PROPS: msg= "{{ msg }}" value={{ value }} step={{ step }} min={{ min }} max={{ max }}</div>
+    >PROPS: msg= "{{ msg }}" value={{ value }} step={{ step }} min={{ min }} max={{ max }} width={{ width }} height={{ height }} midilearn={{ midilearn }}</div>
   </div>
 </template>
 
@@ -48,6 +48,10 @@ export default {
       type: Number,
       default: 50
     },
+    midilearn: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
