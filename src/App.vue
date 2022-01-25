@@ -9,11 +9,11 @@
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob adjusts parent state ⬆️</p>
-    <WebAudioKnobVue msg="boo" :val.sync="knob1Value" :step=10 :max=50></WebAudioKnobVue>
+    <WebAudioKnobVue msg="boo" :value.sync="knob1Value" :step=10 :max=50></WebAudioKnobVue>
 
     <h2>Child Component WebAudioKnobVue</h2>
     <p>knob component adjusting global knob state ⤵️</p>
-    <WebAudioKnobVue msg="boo" :val.sync="knobValGlobal"></WebAudioKnobVue>
+    <WebAudioKnobVue msg="boo" :value.sync="knobValGlobal"></WebAudioKnobVue>
 
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
@@ -41,7 +41,7 @@ export default {
         return this.$store.state.knobValGlobal
       },
       set(value) {
-        // need a setter method to support :val.sync="knobValGlobal" usage, since more complex to set global state
+        // need a setter method to support :value.sync="knobValGlobal" usage, since more complex to set global state
         this.$store.commit('setKnobValGlobal', value)
       }
     }

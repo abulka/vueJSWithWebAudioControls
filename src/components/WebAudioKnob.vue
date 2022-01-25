@@ -10,13 +10,13 @@
       :max="max"
       :step="step"
       midilearn="true"
-      :value="val"
+      :value="value"
       id="/GuitarAmpSim60s/Bass"
     ></webaudio-knob>
 
     <div
       class="props"
-    >PROPS: msg= "{{ msg }}" val={{ val }} step={{ step }} min={{ min }} max={{ max }}</div>
+    >PROPS: msg= "{{ msg }}" value={{ value }} step={{ step }} min={{ min }} max={{ max }}</div>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   name: "WebAudioKnob",
   props: {
     msg: String,
-    val: Number,
+    value: Number,
     step: {
       type: Number,
       default: 1
@@ -58,11 +58,11 @@ export default {
   mounted() {
     let self = this  // for inside the handlers
     this.$refs.knobRef.addEventListener('input', function (e) {
-      self.$emit('update:val', e.target.value)
+      self.$emit('update:value', e.target.value)
     });
   },
   watch: {
-    val: function (newVal) {  // watch the prop 'val'
+    value: function (newVal) {  // watch the prop 'value'
       this.$refs.knobRef.setValue(newVal)
     },
   }
